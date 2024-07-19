@@ -3,11 +3,29 @@ import json
 import sys
 import inspect
 
-def whereami(msg=""):
+def whereami(msg="", verbose=True, obsolete_path = False, path_depth = 2):
     data = inspect.stack()
     myself = data[1]
+    fpath = myself[1]
+    dir_list = []
 
-    return(f"[{myself[1]}:{myself[2]}]:{myself[3]} ->{msg}")
+    if (obsolete_path == False):
+        
+        dir_depth = myself[1].split('/')
+        
+        try:
+            for i in range(1, path_depth+1):
+                dir_list.insert(0, dir_depth[-i])
+        except IndexError as e:
+            pass
+        fpath = "/".join(dir_list)
+        
+    retval = f"[{fpath}:{myself[2]}]:{myself[3]} ->{msg}"
+    
+    if verbose:
+        print(retval)
+
+    return retval
 
 def whocalledme():
     data = inspect.stack()
