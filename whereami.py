@@ -1,17 +1,25 @@
-import datetime
-import json
-import sys
 import inspect
 
+def whoami(msg="", verbose=True):
+    fun_name = inspect.currentframe().f_back.f_code.co_name
+    ret_val = f"[{fun_name}] -> {msg}"
+
+    if verbose:
+        print(ret_val)
+
+    return ret_val
+
 def whereami(msg="", verbose=True, obsolete_path = False, path_depth = 2):
-    data = inspect.stack()
-    myself = data[1]
-    fpath = myself[1]
+    pf = inspect.currentframe().f_back
+    file_n_path = pf.f_code.co_filename
+    fun_name = pf.f_code.co_name
+    lineno = pf.f_lineno
+    
     dir_list = []
 
+    fpath = file_n_path
     if (obsolete_path == False):
-        
-        dir_depth = myself[1].split('/')
+        dir_depth = file_n_path.split('/')
         
         try:
             for i in range(1, path_depth+1):
@@ -20,28 +28,47 @@ def whereami(msg="", verbose=True, obsolete_path = False, path_depth = 2):
             pass
         fpath = "/".join(dir_list)
         
-    retval = f"[{fpath}:{myself[2]}]:{myself[3]} ->{msg}"
+    retval = f"[{fpath}:{lineno}]:{fun_name} -> {msg}"
     
     if verbose:
         print(retval)
 
     return retval
 
-def whocalledme():
-    data = inspect.stack()
-    parent = data[2]
+def whocalledme(verbose=True, obsolete_path = False, path_depth = 2):
+    dir_list = []   
+    pparent_frame = inspect.getouterframes(inspect.currentframe())[2]
+    
+    file_n_path = pparent_frame.filename
+    fun_name = pparent_frame.function
+    lineno = pparent_frame.lineno
+    
+    fpath = file_n_path
+    if (obsolete_path == False):
+        dir_depth = file_n_path.split('/')
+        
+        try:
+            for i in range(1, path_depth+1):
+                dir_list.insert(0, dir_depth[-i])
+        except IndexError as e:
+            pass
+        fpath = "/".join(dir_list)
 
-    return(f"[{parent[1]}:{parent[2]}]:{parent[3]} ->")
+    retval = f"[{fpath}:{lineno}]:{fun_name} -> "
+    if verbose:
+        print(retval)
 
-def calledtree(tree_depth=3, verbose=False):
+    return retval
+
+def calledtree(tree_depth=3, verbose=True):
     data = inspect.stack()
     tree = ""
     
-    stack_len = len(data)
+    frame_len = len(data)
     
-    if (verbose):
-        print(f"stack_len :{stack_len}")
-        
+    if (tree_depth >= frame_len):
+        tree_depth = frame_len-1
+    
     for (i, sf) in enumerate(data):
         if (i == 0):
             continue
@@ -49,34 +76,88 @@ def calledtree(tree_depth=3, verbose=False):
             break
         tree = tree + f"#{tree_depth-i}[{data[i][1]}:{data[i][2]}]:{data[i][3]} <-- \n"
 
+    if (verbose):
+        print(tree)
+
     return tree
 
-def whoami():
-    return inspect.stack()[1][3]
+def whosdaddy(versbose=True):
+    pparent_frame = inspect.getouterframes(inspect.currentframe())[2]
+    fun_name = f"[{pparent_frame.function}]"
+    
+    if (versbose):
+        print(fun_name)
+        
+    return fun_name
 
-def whosdaddy():
-    return inspect.stack()[2][3]
+def test_whoami():
+    whoami()
+    
+    tstr = whoami(verbose=False)
+    print(tstr)
 
-def factorial():
-    print("I am in factorial")
-    print(f"whoami      :{whoami()}")
-    print(f"whereami    :{whereami()}")
-    print(f"whereami    :{whereami('Hello')}")
-    print(f"whocalledme :{whocalledme()}")
-    print(f"calledtree  :\n{calledtree()}")
+    whoami("I am in test_whoami function")
 
-def test1():
-    factorial()
+def test_whereami():
+    whereami()
+    
+    whereami("I am in test_whereami")
+    
+    tstr = whereami(verbose=False)
+    print(tstr)
+
+    whereami(obsolete_path = True)
+    whereami(path_depth=1)
+    whereami(path_depth=2)
+    whereami(path_depth=3)
+    whereami(path_depth=4)
+    whereami(path_depth=5)
+    whereami(path_depth=6)
+
+def test_whocalledme():
+    whocalledme()
+    
+    tstr = whocalledme(verbose=False)
+    print(tstr)
+
+    whocalledme(obsolete_path = True)
+    whocalledme(path_depth=1)
+    whocalledme(path_depth=2)
+    whocalledme(path_depth=3)
+    whocalledme(path_depth=4)
+    whocalledme(path_depth=5)
+    whocalledme(path_depth=6)
+    pass
+ 
+def test_calledtree():
+    calledtree()
+    
+    tstr = calledtree(verbose=False)
+    print(tstr)
+
+    calledtree(tree_depth=1)
+    calledtree(tree_depth=2)
+    calledtree(tree_depth=3)
+    calledtree(tree_depth=4)
+    calledtree(tree_depth=5)
+    calledtree(tree_depth=6)
+
+def test_whosdaddy():
+    whosdaddy()
+    
+    tstr = whosdaddy(versbose=False)
+    print(tstr)
+    
+def test_utility_fun():
+    test_whereami()
+    test_whoami()
+    test_whocalledme()
+    test_calledtree()
+    test_whosdaddy()
+    pass
 
 def main():
-    # utility_fun()
-    print(f"whoami      :{whoami()}")
-    print(f"whereami    :{whereami()}")
-    print(f"whereami    :{whereami('Hello')}")
-    print(f"whocalledme :{whocalledme()}")
-    print(f"calledtree  :\n{calledtree()}")
-    test1()
-    return
+    test_utility_fun()
 
 if (__name__ == "__main__"):
     main()
