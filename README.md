@@ -1,8 +1,9 @@
-# whereami (Python Module)
+# pdbwhereami (Python Module)
 
 ## Purpose
 
 This is an utility module which helps in debugging python sources with below functions
+
 * whoami
 * whereami
 * whocalledme
@@ -33,17 +34,19 @@ This moduled help developers in several key ways, especially when it comes to de
 * **Code Reviews:** During code reviews, having detailed error logs can help reviewers understand the flow and identify potential problem areas more efficiently.
 * **Maintenance:** For long-term maintenance, having detailed error reports with line numbers and file names helps new developers understand and fix issues without needing deep familiarity with the entire codebase.
 
+By leveraging `whoami`, `whereami`, `whocalledme`, `calledtree` and `whosdaddy`, developers can create more robust, maintainable, and easier-to-debug code.
+
 ## How to use it?
 
 ```Py
-from whereami import whoami, whereami, whocalledme, calledtree, whosdaddy
+from pdbwhereami import whoami, whereami, whocalledme, calledtree, whosdaddy
 
 def debug_utility():
     whoami()
     whoami("I am in test_whoami function")
 
     print()
-    
+  
     whereami()
     whereami("I am in test_whereami")
     whereami(obsolete_path = True)
@@ -65,7 +68,7 @@ def debug_utility():
 
     print()
     whosdaddy()
-    
+  
 debug_utility()
 ```
 
