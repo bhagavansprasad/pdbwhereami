@@ -1,4 +1,4 @@
-# pdbwhereami (Python Module)
+# pdbwhereami
 
 ## Purpose
 
