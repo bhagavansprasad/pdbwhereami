@@ -109,5 +109,5 @@ pip install pdbwhereami
 ```sh
 git clone https://github.com/bhagavansprasad/pdbwhereami.git
 cd pdbwhereami
-pip insall ./
+pip install ./
 ```
