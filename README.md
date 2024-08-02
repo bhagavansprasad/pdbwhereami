@@ -100,3 +100,14 @@ debug_utility()
 
 [<module>] ->
 ```
+## Installation
+### Using pip
+```sh
+pip install pdbwhereami
+```
+### Using sources
+```sh
+git clone https://github.com/bhagavansprasad/pdbwhereami.git
+cd pdbwhereami
+pip insall ./
+```

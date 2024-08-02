@@ -1,4 +1,4 @@
-from whereami import whoami, whereami, whocalledme, calledtree, whosdaddy
+from pdbwhereami import whoami, whereami, whocalledme, calledtree, whosdaddy
 
 def test_whoami():
     whoami()
