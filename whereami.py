@@ -81,83 +81,12 @@ def calledtree(tree_depth=3, verbose=True):
 
     return tree
 
-def whosdaddy(versbose=True):
+def whosdaddy(msg="", versbose=True):
     pparent_frame = inspect.getouterframes(inspect.currentframe())[2]
-    fun_name = f"[{pparent_frame.function}]"
+    fun_name = f"[{pparent_frame.function}] -> {msg}"
     
     if (versbose):
         print(fun_name)
         
     return fun_name
 
-def test_whoami():
-    whoami()
-    
-    tstr = whoami(verbose=False)
-    print(tstr)
-
-    whoami("I am in test_whoami function")
-
-def test_whereami():
-    whereami()
-    
-    whereami("I am in test_whereami")
-    
-    tstr = whereami(verbose=False)
-    print(tstr)
-
-    whereami(obsolete_path = True)
-    whereami(path_depth=1)
-    whereami(path_depth=2)
-    whereami(path_depth=3)
-    whereami(path_depth=4)
-    whereami(path_depth=5)
-    whereami(path_depth=6)
-
-def test_whocalledme():
-    whocalledme()
-    
-    tstr = whocalledme(verbose=False)
-    print(tstr)
-
-    whocalledme(obsolete_path = True)
-    whocalledme(path_depth=1)
-    whocalledme(path_depth=2)
-    whocalledme(path_depth=3)
-    whocalledme(path_depth=4)
-    whocalledme(path_depth=5)
-    whocalledme(path_depth=6)
-    pass
- 
-def test_calledtree():
-    calledtree()
-    
-    tstr = calledtree(verbose=False)
-    print(tstr)
-
-    calledtree(tree_depth=1)
-    calledtree(tree_depth=2)
-    calledtree(tree_depth=3)
-    calledtree(tree_depth=4)
-    calledtree(tree_depth=5)
-    calledtree(tree_depth=6)
-
-def test_whosdaddy():
-    whosdaddy()
-    
-    tstr = whosdaddy(versbose=False)
-    print(tstr)
-    
-def test_utility_fun():
-    test_whereami()
-    test_whoami()
-    test_whocalledme()
-    test_calledtree()
-    test_whosdaddy()
-    pass
-
-def main():
-    test_utility_fun()
-
-if (__name__ == "__main__"):
-    main()

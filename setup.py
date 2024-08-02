@@ -5,9 +5,6 @@ setup(
     version="0.1.0",
     py_modules=["whereami"],
     install_requires=[
-        "datetime",
-        "json",
-        "sys",
         "inspect",
     ],
     author="Bhagavan",
@@ -15,7 +12,7 @@ setup(
     description="Helps ",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/my_module",
+    url="https://github.com/bhagavansprasad/whereami.git",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
