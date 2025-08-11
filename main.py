@@ -1,5 +1,50 @@
 from pdbwhereami import whoami, whereami, whocalledme, calledtree, whosdaddy
 
+def debug_utility():
+    whoami()
+    whoami("I am in test_whoami function")
+
+    print()
+    
+    whereami()
+    whereami("I am in test_whereami")
+    whereami(obsolete_path = True)
+    whereami(path_depth=6)
+
+    print()
+
+    whocalledme()
+    whocalledme(obsolete_path = True)
+    whocalledme(path_depth=6)
+
+    print()
+
+    calledtree()
+    tstr = calledtree(verbose=False)
+    print(tstr)
+    calledtree(tree_depth=1)
+    calledtree(tree_depth=2)
+
+    print()
+    whosdaddy()
+    
+debug_utility()
+
+def main():
+    test_whereami()
+    test_whoami()
+    test_whocalledme()
+    test_calledtree()
+    test_whosdaddy()
+
+
+if (__name__ == "__main__"):
+    # main()
+    pass
+
+
+from pdbwhereami import whoami, whereami, whocalledme, calledtree, whosdaddy
+
 def test_whoami():
     whoami()
     
@@ -59,47 +104,3 @@ def test_whosdaddy():
     print(tstr)
 
     whosdaddy("I am in test_whosdaddy")
-
-from pdbwhereami import whoami, whereami, whocalledme, calledtree, whosdaddy
-
-def debug_utility():
-    whoami()
-    whoami("I am in test_whoami function")
-
-    print()
-    
-    whereami()
-    whereami("I am in test_whereami")
-    whereami(obsolete_path = True)
-    whereami(path_depth=6)
-
-    print()
-
-    whocalledme()
-    whocalledme(obsolete_path = True)
-    whocalledme(path_depth=6)
-
-    print()
-
-    calledtree()
-    tstr = calledtree(verbose=False)
-    print(tstr)
-    calledtree(tree_depth=1)
-    calledtree(tree_depth=2)
-
-    print()
-    whosdaddy()
-    
-debug_utility()
-
-def main():
-    test_whereami()
-    test_whoami()
-    test_whocalledme()
-    test_calledtree()
-    test_whosdaddy()
-
-
-if (__name__ == "__main__"):
-    # main()
-    pass
