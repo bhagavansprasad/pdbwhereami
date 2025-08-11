@@ -1,4 +1,6 @@
-from pdbwhereami import whoami, whereami, whocalledme, calledtree, whosdaddy
+from pdbwhereami import whoami, whereami
+from pdbwhereami import whocalledme, calledtree
+from pdbwhereami import whosdaddy
 
 def debug_utility():
     whoami()
