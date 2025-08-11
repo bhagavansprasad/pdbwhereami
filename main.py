@@ -60,7 +60,7 @@ def test_whosdaddy():
 
     whosdaddy("I am in test_whosdaddy")
 
-from whereami import whoami, whereami, whocalledme, calledtree, whosdaddy
+from pdbwhereami import whoami, whereami, whocalledme, calledtree, whosdaddy
 
 def debug_utility():
     whoami()
